@@ -1,0 +1,125 @@
+/*
+
+This file is part of MuraComments
+
+Copyright 2013 Stephen J. Withington, Jr.
+Licensed under the Apache License, Version v2.0
+http://www.apache.org/licenses/LICENSE-2.0
+
+*/
+
+/* MuraFW1 Brand
+-------------------------------------------------- */
+.container-murafw1 .navbar .plugin-brand {
+	padding: 5px;
+	margin-left: 20px;
+	float: right;
+	font-weight: bold;
+	font-size: 20px;
+	/*color: #000;*/
+	color: #666;
+	text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+/* MuraFW1 Nav
+-------------------------------------------------- */
+.container-murafw1 .navbar-murafw1, .mura #cPlugins .container-murafw1 .navbar-murafw1 {
+	margin-bottom: 1.5em;
+}
+.container-murafw1 .navbar .plugin-brand:hover  {
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+	color:#fff;
+}
+.container-murafw1 .navbar .nav > li > a, .mura #cPlugins .container-murafw1 .navbar .nav > li > a {
+	padding: 6px 15px;
+}
+.container-murafw1 .navbar .nav > li > .dropdown-menu a, .mura #cPlugins .container-murafw1 .navbar .nav > li > .dropdown-menu a {
+	text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+}
+
+/* MuraFW1 Sidenav
+-------------------------------------------------- */
+.container-murafw1 .nav.nav-list.murafw1-sidenav a {
+	border: 1px solid #e5e5e5;
+	margin: 0 -15px -1px;
+}
+
+/* MISC. - Project Specific 
+-------------------------------------------------- */
+.mura .container-murafw1 .the-icons {
+	list-style-type: none;
+	margin: 0;
+}
+.mura .container-murafw1 #copyright {
+	padding-top:0.5em;
+}
+.mura .container-murafw1 #copyright a {
+	text-decoration: none;
+}
+.mura .container-murafw1 #copyright i {
+	padding-left: 0.25em;
+}
+.mura .container-murafw1 h1#title {
+	color: #888 !important;
+}
+.container-murafw1 .btn-danger, .container-murafw1 .btn-success, .container-murafw1 .btn-warning {
+	color: #fff;
+	text-shadow: none;
+}
+.mura .container-murafw1 .btn a, .mura .container-murafw1 .btn a:hover {
+	color: #000;
+	text-decoration: none;
+}
+.container-murafw1 i, .container-murafw1 .btn i {
+	text-shadow: none;
+	-webkit-font-smoothing: antialiased;
+}
+.mura .container-murafw1 .mura-table-grid i.icon-calendar, .mura .container-murafw1 .mura-table-grid i.icon-list-alt, .mura .container-murafw1 .mura-table-grid i.icon-list {
+	font-size: 14px;
+}
+.container-murafw1 .mura-table-grid a:hover [class^="icon-"], .container-murafw1 .mura-table-grid a:hover [class*=" icon-"] {
+	color: #000;
+	text-decoration: none;
+}
+
+.container-murafw1 #footer {
+	margin-top: 2em;
+	padding-top: 1em;
+	border-top: 1px solid #e6e6e6;
+}
+.container-murafw1 #footer a {
+	color: #969696;
+}
+.container-murafw1 #footer a:hover {
+	color: #000;
+}
+.container-murafw1 #paginationWrapper {
+	padding: 1em 0;
+}
+.container-murafw1 #filters {
+	margin-bottom: 2em;
+}
+.container-murafw1 .alert a {
+	/*color: #CC0101;*/
+	color: #000;
+	font-weight: bold;
+}
+.container-murafw1 #site-selector {
+	margin-bottom: 2em;
+}
+
+/* Desktop
+------------------------- */
+@media (max-width: 980px) {
+	/* Unfloat brand */
+	.container-murafw1 .navbar-fixed-top .plugin-brand, .mura #cPlugins .container-murafw1 .navbar-fixed-top .plugin-brand {
+		float: left;
+		margin-left: 0;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
