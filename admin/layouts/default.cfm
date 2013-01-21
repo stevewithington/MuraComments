@@ -124,7 +124,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 				<div class="span4">
 					<div id="copyright" class="pull-right">
 						<small><a href="http://www.stephenwithington.com">&copy; #year(now())# Stephen J. Withington, Jr.</a></small>
-						<a href="https://www.facebook.com/stevewithington"><i class="icon-github-sign"></i></a>
+						<a href="https://github.com/stevewithington"><i class="icon-github-sign"></i></a>
 						<a href="https://twitter.com/stevewithington"><i class="icon-twitter-sign"></i></a>
 						<a href="http://www.linkedin.com/in/stevewithington"><i class="icon-linkedin-sign"></i></a>
 						<a href="http://pinterest.com/stevewithington/"><i class="icon-pinterest-sign"></i></a>
