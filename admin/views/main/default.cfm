@@ -183,6 +183,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
+							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=10&isapproved=#rc.isapproved#')#">10</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=25&isapproved=#rc.isapproved#')#">25</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=50&isapproved=#rc.isapproved#')#">50</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=100&isapproved=#rc.isapproved#')#">100</a></li>
