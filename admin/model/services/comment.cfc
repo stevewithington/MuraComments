@@ -36,8 +36,8 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 		, boolean returnCountOnly=false
 	) {
 		var local = {};
-
-		local.qComments = new Query(datasource=getConfigBean().getReadOnlyDatasource());
+		var qComments = new Query(datasource=getConfigBean().getReadOnlyDatasource());
+		var rsComments = '';
 
 		local.qryStr = '
 			SELECT *
@@ -48,65 +48,65 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 		// siteid
 		if ( StructKeyExists(arguments, 'siteid') ) {
 			local.qryStr &= ' AND siteid = ( :siteid ) ';
-			local.qComments.addParam(name='siteid', value=arguments.siteid, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='siteid', value=arguments.siteid, cfsqltype='cf_sql_varchar');
 		}
 
 		// commentid
 		if ( StructKeyExists(arguments, 'commentid') ) {
 			local.qryStr &= ' AND commentid = ( :commentid ) ';
-			local.qComments.addParam(name='commentid', value=arguments.commentid, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='commentid', value=arguments.commentid, cfsqltype='cf_sql_varchar');
 		}
 
 		//contentid
 		if ( StructKeyExists(arguments, 'contentid') ) {
 			local.qryStr &= ' AND contentid = ( :contentid ) ';
-			local.qComments.addParam(name='contentid', value=arguments.contentid, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='contentid', value=arguments.contentid, cfsqltype='cf_sql_varchar');
 		}
 
 		// parentid
 		if ( StructKeyExists(arguments, 'parentid') ) {
 			local.qryStr &= ' AND parentid = ( :parentid ) ';
-			local.qComments.addParam(name='parentid', value=arguments.parentid, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='parentid', value=arguments.parentid, cfsqltype='cf_sql_varchar');
 		}
 
 		// remoteid
 		if ( StructKeyExists(arguments, 'remoteid') ) {
 			local.qryStr &= ' AND remoteid = ( :remoteid ) ';
-			local.qComments.addParam(name='remoteid', value=arguments.remoteid, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='remoteid', value=arguments.remoteid, cfsqltype='cf_sql_varchar');
 		}
 
 		// ip
 		if ( StructKeyExists(arguments, 'ip') ) {
 			local.qryStr &= ' AND ip = ( :ip ) ';
-			local.qComments.addParam(name='ip', value=arguments.ip, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='ip', value=arguments.ip, cfsqltype='cf_sql_varchar');
 		}
 
 		// email
 		if ( StructKeyExists(arguments, 'email') ) {
 			local.qryStr &= ' AND email = ( :email ) ';
-			local.qComments.addParam(name='email', value=arguments.email, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='email', value=arguments.email, cfsqltype='cf_sql_varchar');
 		}
 
 		// name
 		if ( StructKeyExists(arguments, 'name') ) {
 			local.qryStr &= ' AND name = ( :name ) ';
-			local.qComments.addParam(name='name', value=arguments.name, cfsqltype='cf_sql_varchar');
+			qComments.addParam(name='name', value=arguments.name, cfsqltype='cf_sql_varchar');
 		}
 
 		// isapproved
 		if ( StructKeyExists(arguments, 'isapproved') ) {
 			local.qryStr &= ' AND isapproved = ( :isapproved ) ';
-			local.qComments.addParam(name='isapproved', value=arguments.isapproved, cfsqltype='cf_sql_bit');
+			qComments.addParam(name='isapproved', value=arguments.isapproved, cfsqltype='cf_sql_bit');
 		}
 
 		local.qryStr &= ' ORDER BY ' & arguments.sortby & ' ' & arguments.sortdirection;
 
-		local.rsComments = local.qComments.setSQL(local.qryStr).execute().getResult();
+		rsComments = qComments.setSQL(local.qryStr).execute().getResult();
 
 		if ( arguments.returnCountOnly ) {
-			return local.rsComments.recordcount;
+			return rsComments.recordcount;
 		} else {
-			return local.rsComments;
+			return rsComments;
 		}
 	}
 

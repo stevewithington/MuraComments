@@ -128,13 +128,9 @@ component persistent="false" accessors="true" output="false" extends="includes.f
 			&& IsBoolean(httpRequestData.headers['X-#variables.framework.package#-AJAX']) 
 			&& httpRequestData.headers['X-#variables.framework.package#-AJAX'] 
 		) {
-			if ( StructKeyExists(request.context, 'fw') ) {
-				StructDelete(request.context, 'fw');
-			}
-			if ( StructKeyExists(request.context, '$') ) {
-				StructDelete(request.context, '$');
-			}
-			WriteOutput( SerializeJSON(request.context) );
+			StructDelete(request.context, 'fw');
+			StructDelete(request.context, '$');
+			WriteOutput(SerializeJSON(request.context));
 			abort;
 		};
 	}
@@ -217,7 +213,14 @@ component persistent="false" accessors="true" output="false" extends="includes.f
 			for ( i=1; i <= ArrayLen(arrFW1Keys); i++ ) {
 				StructDelete(request._fw1, arrFW1Keys[i]);
 			};
-			request._fw1.requestDefaultsInitialized = false;
+			request._fw1 = {
+				cgiScriptName = CGI.SCRIPT_NAME
+				, cgiRequestMethod = CGI.REQUEST_METHOD
+				, controllers = []
+				, requestDefaultsInitialized = false
+				, services = []
+				, trace = []
+			};
 		};
 	}
 
