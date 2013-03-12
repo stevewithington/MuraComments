@@ -13,7 +13,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 	// !important: enter the plugin packageName here. must be the same as found in '{context}/plugin/config.xml.cfm'
 	variables.framework.package = 'MuraComments';
-	variables.framework.packageVersion = '0.104';
+	variables.framework.packageVersion = '0.105';
 
 	// If true, then additional information is returned by the Application.onError() method
 	// and FW1 will 'reloadApplicationOnEveryRequest' (unless explicitly set otherwise below).

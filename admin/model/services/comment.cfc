@@ -101,7 +101,9 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 
 		local.qryStr &= ' ORDER BY ' & arguments.sortby & ' ' & arguments.sortdirection;
 
-		rsComments = qComments.setSQL(local.qryStr).execute().getResult();
+		//rsComments = qComments.setSQL(local.qryStr).execute().getResult(); // breaks in ACF9: https://github.com/stevewithington/MuraComments/issues/2 .. using workaround instead
+		qComments.setSQL(local.qryStr);
+		rsComments = qComments.execute().getResult();
 
 		if ( arguments.returnCountOnly ) {
 			return rsComments.recordcount;
