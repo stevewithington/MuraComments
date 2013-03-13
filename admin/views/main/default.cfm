@@ -188,6 +188,8 @@ http://www.apache.org/licenses/LICENSE-2.0
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=50&isapproved=#rc.isapproved#')#">50</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=100&isapproved=#rc.isapproved#')#">100</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=250&isapproved=#rc.isapproved#')#">250</a></li>
+							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=500&isapproved=#rc.isapproved#')#">500</a></li>
+							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=1000&isapproved=#rc.isapproved#')#">1000</a></li>
 							<li><a href="#buildURL(action='admin:main.default', querystring='nextn=100000&isapproved=#rc.isapproved#')#">ALL</a></li>
 						</ul>
 					</div>
@@ -204,12 +206,42 @@ http://www.apache.org/licenses/LICENSE-2.0
 					#val(rc.pageno)# of #rc.itComments.pageCount()# total pages
 				</div> --->
 				<div class="span12">
-					<div class="paginationWrapper">
-						<ul class="pagination">
-							<cfloop from="1" to="#rc.itComments.pageCount()#" index="p">
-								<li>
-								<a href="#buildURL(action='admin:main.default', queryString='pageno=#p#&nextn=#rc.nextn#&isapproved=#rc.isapproved#')#"<cfif val(rc.pageno) eq p> class="current"</cfif>>#p#</a></li>
+					<div class="pagination paginationWrapper">
+						<ul>
+							<!--- PREVIOUS --->
+							<cfscript>
+								if ( rc.pageno eq 1 ) {
+									local.prevClass = 'disabled';
+									local.prevURL = '##';
+								} else {
+									local.prevClass = '';
+									local.prevURL = buildURL(action='admin:main.default', queryString='pageno=#rc.pageno-1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
+								}
+							</cfscript>
+							<li class="#local.prevClass#">
+								<a href="#local.prevURL#">&laquo;</a>
+							</li>
+							<!--- LINKS --->
+							<cfloop from="#rc.startPage#" to="#rc.endPage#" index="p">
+								<li<cfif rc.pageno eq p> class="disabled"</cfif>>
+									<a href="#buildURL(action='admin:main.default', queryString='pageno=#p#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#')#"<cfif val(rc.pageno) eq p> class="active"</cfif>>
+										#p#
+									</a>
+								</li>
 							</cfloop>
+							<!--- NEXT --->
+							<cfscript>
+								if ( rc.pageno == rc.totalPages ) {
+									rc.nextClass = 'disabled';
+									rc.nextURL = '##';
+								} else {
+									rc.nextClass = '';
+									rc.nextURL = buildURL(action='admin:main.default', queryString='pageno=#rc.pageno+1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
+								}
+							</cfscript>
+							<li class="#rc.nextClass#">
+								<a href="#rc.nextURL#">&raquo;</a>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -19,7 +19,7 @@ component persistent="false" accessors="true" output="false" extends="controller
 		param name='rc.sortby' default='entered';
 		param name='rc.sortdirection' default='asc';
 		param name='rc.pageno' default=1;
-		param name='rc.nextn' default=10;
+		param name='rc.nextn' default=3; // 25
 		param name='rc.isapproved' default=false;
 
 		rc.rsSites = rc.pc.getAssignedSites();
@@ -27,22 +27,44 @@ component persistent="false" accessors="true" output="false" extends="controller
 
 		if ( !rc.pc.getAssignedSites().recordcount || !ListFindNoCase(rc.listSites, rc.$.event('siteid')) ) {
 			getFW().redirect(action='admin:main.unassigned');
-		};
+		}
 
 		rc.siteid = rc.$.event('siteid');
-
 		rc.sortdirlink = rc.sortdirection == 'asc' ? 'desc' : 'asc';
 		rc.itComments = getCommentService().getCommentsIterator(argumentCollection=rc);
 
 		// Pagination Setup
-		if ( val(rc.nextn) < 1 ) { 
+		rc.nextn = Val(rc.nextn);
+		rc.pageno = Val(rc.pageno);
+		if ( rc.nextn < 1 ) { 
 			rc.nextn = 10; 
-		};
-		rc.itComments.setNextN(val(rc.nextn));
-		if ( val(rc.pageno) < 1 || val(rc.pageno) > rc.itComments.pageCount() ) {
+		}
+		rc.itComments.setNextN(rc.nextn);
+		if ( rc.pageno < 1 || rc.pageno > rc.itComments.pageCount() ) {
 			rc.pageno = 1;
-		};
-		rc.itComments.setPage(val(rc.pageno));
+		}
+		rc.itComments.setPage(rc.pageno);
+
+		rc.totalPages = rc.itComments.pageCount();
+		rc.buffer = 3;
+		rc.startPage = 1;
+		rc.endPage = rc.totalPages;
+
+		if ( rc.buffer < rc.totalPages ) {
+			rc.startPage = rc.pageno-rc.buffer;
+			rc.endPage = rc.pageno+rc.buffer;
+
+			if ( rc.startPage < 1 ) {
+				rc.endPage = rc.endPage + Abs(rc.startPage) + 1;
+				rc.startPage = 1;
+			} 
+
+			if ( rc.endPage > rc.totalPages ) {
+				rc.x = rc.startPage - (rc.endPage - rc.totalPages);
+				rc.startPage = rc.x < 1 ? 1 : rc.x;
+				rc.endPage = rc.totalPages;
+			}
+		}
 
 		// recordcounts
 		//rc.countApproved = getCommentService().getComments(siteid=rc.siteid, isapproved=true, returnCountOnly=true);
