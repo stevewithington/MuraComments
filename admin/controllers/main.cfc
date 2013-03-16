@@ -19,7 +19,7 @@ component persistent="false" accessors="true" output="false" extends="controller
 		param name='rc.sortby' default='entered';
 		param name='rc.sortdirection' default='asc';
 		param name='rc.pageno' default=1;
-		param name='rc.nextn' default=3; // 25
+		param name='rc.nextn' default=25; // 25
 		param name='rc.isapproved' default=false;
 
 		rc.rsSites = rc.pc.getAssignedSites();
@@ -87,7 +87,7 @@ component persistent="false" accessors="true" output="false" extends="controller
 							break;
 						case 'disapprove' : getCommentService().disapprove(local.arr[local.i]);
 							break;
-						case 'delete' : getCommentService().disapprove(local.arr[local.i]);
+						case 'delete' : getCommentService().delete(local.arr[local.i]);
 							break;
 						default : break;
 					}
