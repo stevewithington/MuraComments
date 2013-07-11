@@ -19,8 +19,9 @@ component persistent="false" accessors="true" output="false" extends="controller
 		param name='rc.sortby' default='entered';
 		param name='rc.sortdirection' default='asc';
 		param name='rc.pageno' default=1;
-		param name='rc.nextn' default=25; // 25
+		param name='rc.nextn' default=5; // 25
 		param name='rc.isapproved' default=false;
+		param name='rc.buffer' default=3;
 
 		rc.rsSites = rc.pc.getAssignedSites();
 		rc.listSites = ValueList(rc.rsSites.siteid);
@@ -46,7 +47,6 @@ component persistent="false" accessors="true" output="false" extends="controller
 		rc.itComments.setPage(rc.pageno);
 
 		rc.totalPages = rc.itComments.pageCount();
-		rc.buffer = 3;
 		rc.startPage = 1;
 		rc.endPage = rc.totalPages;
 
@@ -64,6 +64,22 @@ component persistent="false" accessors="true" output="false" extends="controller
 				rc.startPage = rc.x < 1 ? 1 : rc.x;
 				rc.endPage = rc.totalPages;
 			}
+		}
+
+		if ( rc.pageno eq 1 ) {
+			rc.prevClass = 'disabled';
+			rc.prevURL = '##';
+		} else {
+			rc.prevClass = '';
+			rc.prevURL = variables.fw.buildURL(action='admin:main.default', queryString='pageno=#rc.pageno-1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
+		}
+
+		if ( rc.pageno == rc.totalPages ) {
+			rc.nextClass = 'disabled';
+			rc.nextURL = '##';
+		} else {
+			rc.nextClass = '';
+			rc.nextURL = variables.fw.buildURL(action='admin:main.default', queryString='pageno=#rc.pageno+1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
 		}
 
 		// recordcounts

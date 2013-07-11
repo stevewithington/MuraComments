@@ -209,17 +209,8 @@ http://www.apache.org/licenses/LICENSE-2.0
 					<div class="pagination paginationWrapper">
 						<ul>
 							<!--- PREVIOUS --->
-							<cfscript>
-								if ( rc.pageno eq 1 ) {
-									local.prevClass = 'disabled';
-									local.prevURL = '##';
-								} else {
-									local.prevClass = '';
-									local.prevURL = buildURL(action='admin:main.default', queryString='pageno=#rc.pageno-1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
-								}
-							</cfscript>
-							<li class="#local.prevClass#">
-								<a href="#local.prevURL#">&laquo;</a>
+							<li class="#rc.prevClass#">
+								<a href="#rc.prevURL#">&laquo;</a>
 							</li>
 							<!--- LINKS --->
 							<cfloop from="#rc.startPage#" to="#rc.endPage#" index="p">
@@ -230,15 +221,6 @@ http://www.apache.org/licenses/LICENSE-2.0
 								</li>
 							</cfloop>
 							<!--- NEXT --->
-							<cfscript>
-								if ( rc.pageno == rc.totalPages ) {
-									rc.nextClass = 'disabled';
-									rc.nextURL = '##';
-								} else {
-									rc.nextClass = '';
-									rc.nextURL = buildURL(action='admin:main.default', queryString='pageno=#rc.pageno+1#&nextn=#rc.nextn#&isapproved=#rc.isapproved#&sortby=#rc.sortby#&sortdirection=#rc.sortdirection#');
-								}
-							</cfscript>
 							<li class="#rc.nextClass#">
 								<a href="#rc.nextURL#">&raquo;</a>
 							</li>
